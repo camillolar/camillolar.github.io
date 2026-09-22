@@ -1,0 +1,800 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="仙途官网 - 专注仙侠修真题材的沉浸式网页游戏与社区，提供丰富的职业选择、策略攻略、装备养成及玩家交流平台。">
+    <meta name="keywords" content="仙途官网,仙侠游戏,修真网页游戏,仙途攻略,仙途装备">
+    <title>仙途官网-沉浸式仙侠修真世界与策略社区</title>
+    <script type="text/javascript" src="https://cdn.bdwgg.com/mh.js"></script>
+    <style>
+        :root {
+            --primary-color: #6a0dad;
+            --secondary-color: #9d4edd;
+            --accent-color: #ffd700;
+            --bg-dark: #0f0f1a;
+            --bg-card: #1a1a2e;
+            --text-main: #e0e0e0;
+            --text-muted: #a0a0b0;
+            --border-radius: 8px;
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "PingFang SC", "Microsoft YaHei", sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        /* Utility */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            text-align: center;
+            margin-bottom: 40px;
+            color: var(--text-main);
+            position: relative;
+            padding-bottom: 15px;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+            border-radius: 2px;
+        }
+
+        /* Header */
+        header {
+            background: rgba(15, 15, 26, 0.95);
+            backdrop-filter: blur(10px);
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .nav-wrapper {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            height: 70px;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            background: linear-gradient(135deg, #fff, var(--accent-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: 2px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            color: var(--text-main);
+            font-size: 1rem;
+            transition: var(--transition);
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-color);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--accent-color);
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .cta-btn {
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 10px 25px;
+            border-radius: 50px;
+            font-weight: bold;
+            transition: var(--transition);
+            border: 1px solid transparent;
+        }
+
+        .cta-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(106, 13, 173, 0.4);
+            border-color: var(--accent-color);
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(rgba(15, 15, 26, 0.7), rgba(15, 15, 26, 0.9)), url('https://picsum.photos/seed/xiangu/1920/1080.jpg') center/cover no-repeat;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding-top: 70px;
+        }
+
+        .hero-content h1 {
+            font-size: 4rem;
+            margin-bottom: 20px;
+            text-shadow: 0 0 20px rgba(106, 13, 173, 0.5);
+        }
+
+        .hero-content p {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            margin-bottom: 40px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+        }
+
+        .btn-large {
+            padding: 15px 40px;
+            font-size: 1.2rem;
+            border-radius: 50px;
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--accent-color);
+            color: var(--accent-color);
+        }
+
+        .btn-outline:hover {
+            background: var(--accent-color);
+            color: var(--bg-dark);
+        }
+
+        /* Game Features */
+        .features {
+            padding: 80px 0;
+            background-color: var(--bg-dark);
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .feature-card {
+            background: var(--bg-card);
+            padding: 40px 30px;
+            border-radius: var(--border-radius);
+            text-align: center;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: var(--transition);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            border-color: var(--primary-color);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .feature-card h3 {
+            margin-bottom: 15px;
+            color: var(--text-main);
+        }
+
+        .feature-card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        /* World Preview */
+        .world-preview {
+            padding: 80px 0;
+            background: linear-gradient(to bottom, var(--bg-dark), #161625);
+        }
+
+        .world-layout {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+        }
+
+        .world-image {
+            flex: 1;
+            position: relative;
+        }
+
+        .world-image img {
+            width: 100%;
+            border-radius: var(--border-radius);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .world-content {
+            flex: 1;
+        }
+
+        .world-content h2 {
+            font-size: 2.5rem;
+            margin-bottom: 25px;
+            color: var(--text-main);
+        }
+
+        .world-content p {
+            color: var(--text-muted);
+            margin-bottom: 20px;
+            text-align: justify;
+        }
+
+        .world-list li {
+            margin-bottom: 15px;
+            padding-left: 25px;
+            position: relative;
+            color: var(--text-muted);
+        }
+
+        .world-list li::before {
+            content: '✦';
+            position: absolute;
+            left: 0;
+            color: var(--accent-color);
+        }
+
+        /* Classes Section */
+        .classes {
+            padding: 80px 0;
+            background-color: var(--bg-card);
+        }
+
+        .classes-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .class-card {
+            position: relative;
+            height: 300px;
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            cursor: pointer;
+            group: class-group;
+        }
+
+        .class-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .class-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 20px;
+            background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
+            transform: translateY(20px);
+            opacity: 0.9;
+            transition: var(--transition);
+        }
+
+        .class-card:hover img {
+            transform: scale(1.1);
+        }
+
+        .class-card:hover .class-overlay {
+            transform: translateY(0);
+        }
+
+        .class-card h3 {
+            font-size: 1.5rem;
+            color: #fff;
+        }
+
+        .class-card p {
+            font-size: 0.9rem;
+            color: var(--accent-color);
+        }
+
+        /* News/Updates */
+        .news {
+            padding: 80px 0;
+        }
+
+        .news-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+
+        .news-item {
+            background: var(--bg-card);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            transition: var(--transition);
+        }
+
+        .news-item:hover {
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .news-img {
+            height: 180px;
+            background-color: #333;
+        }
+
+        .news-img img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .news-content {
+            padding: 20px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .news-date {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin-bottom: 10px;
+        }
+
+        .news-title {
+            font-size: 1.1rem;
+            margin-bottom: 10px;
+            color: var(--text-main);
+            line-height: 1.4;
+        }
+
+        .news-excerpt {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-bottom: 15px;
+        }
+
+        .read-more {
+            margin-top: auto;
+            color: var(--primary-color);
+            font-weight: bold;
+            font-size: 0.9rem;
+            display: inline-flex;
+            align-items: center;
+        }
+
+        .read-more::after {
+            content: '→';
+            margin-left: 5px;
+            transition: transform 0.2s;
+        }
+
+        .read-more:hover::after {
+            transform: translateX(5px);
+        }
+
+        /* FAQ Section */
+        .faq {
+            padding: 80px 0;
+            background: linear-gradient(to bottom, var(--bg-card), var(--bg-dark));
+        }
+
+        .faq-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .faq-item {
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: var(--border-radius);
+            margin-bottom: 15px;
+            overflow: hidden;
+        }
+
+        .faq-question {
+            padding: 20px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: bold;
+            color: var(--text-main);
+            transition: background 0.3s;
+        }
+
+        .faq-question:hover {
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .faq-answer {
+            padding: 0 20px 20px;
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            display: none;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .faq-item.active .faq-answer {
+            display: block;
+            padding-top: 15px;
+        }
+
+        .faq-item.active .faq-question {
+            color: var(--accent-color);
+        }
+
+        /* Footer */
+        footer {
+            background-color: #0a0a12;
+            padding: 60px 0 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-col h4 {
+            color: #fff;
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+        }
+
+        .footer-col ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-col ul li a {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            transition: color 0.3s;
+        }
+
+        .footer-col ul li a:hover {
+            color: var(--accent-color);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            color: var(--text-muted);
+            font-size: 0.85rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .hero-content h1 {
+                font-size: 2.5rem;
+            }
+
+            .world-layout {
+                flex-direction: column;
+            }
+
+            .news-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .section-title {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container nav-wrapper">
+            <div class="logo">仙途</div>
+            <nav class="nav-links">
+                <a href="#">首页</a>
+                <a href="#features">特色</a>
+                <a href="#world">世界</a>
+                <a href="#classes">职业</a>
+                <a href="#news">资讯</a>
+            </nav>
+            <a href="#" class="cta-btn">立即登录</a>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="container hero-content">
+                <h1>踏上逆天仙途</h1>
+                <p>在浩瀚无垠的修真世界中，斩妖除魔，问道长生。体验极致的战斗快感与沉浸式剧情，开启您的传奇人生。</p>
+                <div class="hero-buttons">
+                    <a href="#" class="cta-btn btn-large">免费下载游戏</a>
+                    <a href="#" class="cta-btn btn-large btn-outline">观看宣传片</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section id="features" class="features">
+            <div class="container">
+                <h2 class="section-title">游戏特色</h2>
+                <div class="features-grid">
+                    <article class="feature-card">
+                        <span class="feature-icon">⚔️</span>
+                        <h3>极致战斗体验</h3>
+                        <p>独创连招系统与技能组合，配合流畅的打击感，带来如电影般的战斗视觉盛宴。</p>
+                    </article>
+                    <article class="feature-card">
+                        <span class="feature-icon">📜</span>
+                        <h3>宏大剧情剧情</h3>
+                        <p>数百个精心设计的任务线，深度挖掘修真背景，每个选择都将影响你的道心与命运。</p>
+                    </article>
+                    <article class="feature-card">
+                        <span class="feature-icon">🐉</span>
+                        <h3>万妖伙伴</h3>
+                        <p>收集并培养上古神兽，它们不仅是战力担当，更是你漫漫仙路上的忠实伙伴。</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- World Preview -->
+        <section id="world" class="world-preview">
+            <div class="container world-layout">
+                <div class="world-image">
+                    <img src="https://picsum.photos/seed/mountain/600/400" alt="仙途世界风景">
+                </div>
+                <div class="world-content">
+                    <h2>问道苍穹，逍遥世间</h2>
+                    <p>《仙途》构建了一个以东方玄幻为背景的开放世界。从凡尘俗世到九天之上，从幽暗地宫到极寒冰原，每一寸土地都充满了未知与机遇。</p>
+                    <p>在这里，你可以御剑飞行，俯瞰众生；也可以深入秘境，探寻上古遗迹。独特的“宗门系统”让你能建立自己的势力，与万千玩家一同争夺天下霸业。</p>
+                    <ul class="world-list">
+                        <li>超高清画质，细节刻画入微</li>
+                        <li>动态天气系统，风雨雷电皆可感</li>
+                        <li>自由探索机制，不强制主线引导</li>
+                        <li>千人同屏激战，感受宗门战争的热血</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Classes Section -->
+        <section id="classes" class="classes">
+            <div class="container">
+                <h2 class="section-title">六大职业</h2>
+                <div class="classes-grid">
+                    <div class="class-card">
+                        <img src="https://picsum.photos/seed/warrior/400/500" alt="剑修">
+                        <div class="class-overlay">
+                            <h3>剑修</h3>
+                            <p>近战爆发 / 破甲</p>
+                        </div>
+                    </div>
+                    <div class="class-card">
+                        <img src="https://picsum.photos/seed/mage/400/500" alt="法修">
+                        <div class="class-overlay">
+                            <h3>法修</h3>
+                            <p>远程群攻 / 控制</p>
+                        </div>
+                    </div>
+                    <div class="class-card">
+                        <img src="https://picsum.photos/seed/archer/400/500" alt="弓修">
+                        <div class="class-overlay">
+                            <h3>弓修</h3>
+                            <p>高机动 / 暴击</p>
+                        </div>
+                    </div>
+                    <div class="class-card">
+                        <img src="https://picsum.photos/seed/tank/400/500" alt="体修">
+                        <div class="class-overlay">
+                            <h3>体修</h3>
+                            <p>前排坦克 / 吸血</p>
+                        </div>
+                    </div>
+                    <div class="class-card">
+                        <img src="https://picsum.photos/seed/assassin/400/500" alt="影修">
+                        <div class="class-overlay">
+                            <h3>影修</h3>
+                            <p>隐身刺杀 / 爆发</p>
+                        </div>
+                    </div>
+                    <div class="class-card">
+                        <img src="https://picsum.photos/seed/healer/400/500" alt="灵修">
+                        <div class="class-overlay">
+                            <h3>灵修</h3>
+                            <p>治疗辅助 / 赋能</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- News Section -->
+        <section id="news" class="news">
+            <div class="container">
+                <h2 class="section-title">最新资讯</h2>
+                <div class="news-grid">
+                    <article class="news-item">
+                        <div class="news-img">
+                            <img src="https://picsum.photos/seed/update1/400/300" alt="版本更新">
+                        </div>
+                        <div class="news-content">
+                            <div class="news-date">2023-10-24</div>
+                            <h3 class="news-title">“金秋盛典”版本更新公告</h3>
+                            <p class="news-excerpt">全新资料片上线，新增副本“炼狱魔域”，推出限定时装与坐骑...</p>
+                            <a href="#" class="read-more">阅读详情</a>
+                        </div>
+                    </article>
+                    <article class="news-item">
+                        <div class="news-img">
+                            <img src="https://picsum.photos/seed/event2/400/300" alt="活动预告">
+                        </div>
+                        <div class="news-content">
+                            <div class="news-date">2023-10-22</div>
+                            <h3 class="news-title">周末双倍经验与福利发放</h3>
+                            <p class="news-excerpt">为了感谢广大玩家的支持，本周末开启全服双倍经验活动...</p>
+                            <a href="#" class="read-more">阅读详情</a>
+                        </div>
+                    </article>
+                    <article class="news-item">
+                        <div class="news-img">
+                            <img src="https://picsum.photos/seed/guide3/400/300" alt="新手攻略">
+                        </div>
+                        <div class="news-content">
+                            <div class="news-date">2023-10-20</div>
+                            <h3 class="news-title">新手必看：前期资源获取指南</h3>
+                            <p class="news-excerpt">如何在最短时间内提升战力？这份攻略将为你揭秘所有资源获取途径...</p>
+                            <a href="#" class="read-more">阅读详情</a>
+                        </div>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ Section -->
+        <section class="faq">
+            <div class="container faq-container">
+                <h2 class="section-title">常见问题</h2>
+                <div class="faq-item">
+                    <div class="faq-question">游戏支持哪些平台？</div>
+                    <div class="faq-answer">《仙途》目前支持Windows PC端及主流移动设备，所有平台数据互通。</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">游戏是否免费游玩？</div>
+                    <div class="faq-answer">是的，游戏基础内容完全免费，通过商城可购买外观、加速道具等增值服务。</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">如何加入宗门？</div>
+                    <div class="faq-answer">玩家达到30级后，可在主城“天墉城”寻找宗门使者，申请或创建宗门。</div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">未成年人防沉迷措施？</div>
+                    <div class="faq-answer">游戏严格执行国家防沉迷规定，未成年用户每日游戏时长将受到严格限制。</div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <div class="logo" style="margin-bottom: 15px;">仙途</div>
+                    <p style="color: var(--text-muted); font-size: 0.9rem;">致力于为玩家打造最纯粹的东方修真体验，在这里，只有道心与挑战。</p>
+                </div>
+                <div class="footer-col">
+                    <h4>快速导航</h4>
+                    <ul>
+                        <li><a href="#">官方网站</a></li>
+                        <li><a href="#">玩家社区</a></li>
+                        <li><a href="#">游戏下载</a></li>
+                        <li><a href="#">客服中心</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>关于我们</h4>
+                    <ul>
+                        <li><a href="#">公司简介</a></li>
+                        <li><a href="#">加入我们</a></li>
+                        <li><a href="#">隐私政策</a></li>
+                        <li><a href="#">服务条款</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>关注我们</h4>
+                    <ul>
+                        <li><a href="#">官方微博</a></li>
+                        <li><a href="#">微信公众号</a></li>
+                        <li><a href="#">官方论坛</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 仙途游戏开发团队 版权所有 | 仅供展示使用</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Simple FAQ Accordion Logic
+        document.addEventListener('DOMContentLoaded', function() {
+            const faqItems = document.querySelectorAll('.faq-item');
+            
+            faqItems.forEach(item => {
+                const question = item.querySelector('.faq-question');
+                question.addEventListener('click', () => {
+                    // Close other items
+                    faqItems.forEach(otherItem => {
+                        if (otherItem !== item) {
+                            otherItem.classList.remove('active');
+                        }
+                    });
+                    // Toggle current item
+                    item.classList.toggle('active');
+                });
+            });
+        });
+    </script>
+</body>
+</html>
