@@ -1,0 +1,782 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="在线直播平台提供高清流畅的实时视频流媒体服务，涵盖游戏竞技、才艺表演、生活互动、户外探险及专业学术讲座等多种内容。支持多终端观看，打造沉浸式互动娱乐体验。">
+    <meta name="keywords" content="在线直播,实时视频,网络直播,游戏直播,才艺直播,互动娱乐">
+    <title>在线直播-高清实时视频互动娱乐平台</title>
+    <script type="text/javascript" src="https://cdn.bdwgg.com/mh.js"></script>
+    <style>
+        :root {
+            --primary-color: #ff4757;
+            --primary-hover: #ff6b81;
+            --secondary-color: #2f3542;
+            --bg-color: #f1f2f6;
+            --card-bg: #ffffff;
+            --text-main: #2f3542;
+            --text-sub: #747d8c;
+            --spacing-unit: 16px;
+            --border-radius: 12px;
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        /* Header & Nav */
+        header {
+            background-color: var(--card-bg);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header-inner {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 var(--spacing-unit);
+            height: 64px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 800;
+            color: var(--primary-color);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .logo span {
+            color: var(--secondary-color);
+        }
+
+        nav ul {
+            display: flex;
+            gap: 24px;
+        }
+
+        nav a {
+            font-weight: 500;
+            color: var(--text-main);
+            transition: var(--transition);
+            padding: 8px 0;
+            position: relative;
+        }
+
+        nav a:hover, nav a.active {
+            color: var(--primary-color);
+        }
+
+        nav a.active::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: var(--primary-color);
+        }
+
+        .user-actions {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+        }
+
+        .btn {
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            border: none;
+            font-size: 14px;
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 1px solid var(--text-sub);
+            color: var(--text-main);
+        }
+
+        .btn-outline:hover {
+            border-color: var(--primary-color);
+            color: var(--primary-color);
+        }
+
+        .btn-primary {
+            background-color: var(--primary-color);
+            color: white;
+            box-shadow: 0 4px 10px rgba(255, 71, 87, 0.3);
+        }
+
+        .btn-primary:hover {
+            background-color: var(--primary-hover);
+            transform: translateY(-1px);
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #2f3542 0%, #1e272e 100%);
+            color: white;
+            padding: 60px 0;
+            text-align: center;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .hero h1 {
+            font-size: 42px;
+            margin-bottom: 16px;
+            font-weight: 800;
+        }
+
+        .hero p {
+            font-size: 18px;
+            opacity: 0.9;
+            margin-bottom: 32px;
+        }
+
+        .search-bar {
+            display: flex;
+            max-width: 500px;
+            margin: 0 auto;
+            background: rgba(255,255,255,0.1);
+            border-radius: 30px;
+            padding: 4px;
+            border: 1px solid rgba(255,255,255,0.2);
+            backdrop-filter: blur(10px);
+        }
+
+        .search-bar input {
+            flex: 1;
+            background: transparent;
+            border: none;
+            padding: 12px 20px;
+            color: white;
+            font-size: 16px;
+            outline: none;
+        }
+
+        .search-bar input::placeholder {
+            color: rgba(255,255,255,0.6);
+        }
+
+        .search-bar button {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 24px;
+            padding: 0 30px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .search-bar button:hover {
+            background-color: var(--primary-hover);
+        }
+
+        /* Categories */
+        .categories {
+            padding: 40px var(--spacing-unit);
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .category-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+            gap: 16px;
+        }
+
+        .category-item {
+            background: var(--card-bg);
+            padding: 20px;
+            border-radius: var(--border-radius);
+            text-align: center;
+            cursor: pointer;
+            transition: var(--transition);
+            box-shadow: 0 2px 6px rgba(0,0,0,0.04);
+        }
+
+        .category-item:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow);
+            border-bottom: 3px solid var(--primary-color);
+        }
+
+        .category-icon {
+            font-size: 32px;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .category-name {
+            font-weight: 600;
+            font-size: 14px;
+            color: var(--text-main);
+        }
+
+        /* Live Rooms Grid */
+        .live-section {
+            padding: 40px var(--spacing-unit);
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px;
+        }
+
+        .section-title {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--text-main);
+            position: relative;
+            padding-left: 16px;
+        }
+
+        .section-title::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 4px;
+            height: 24px;
+            background-color: var(--primary-color);
+            border-radius: 2px;
+        }
+
+        .live-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 24px;
+        }
+
+        .live-card {
+            background: var(--card-bg);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            cursor: pointer;
+            position: relative;
+        }
+
+        .live-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 24px rgba(0,0,0,0.12);
+        }
+
+        .live-thumbnail {
+            position: relative;
+            width: 100%;
+            padding-top: 56.25%; /* 16:9 Aspect Ratio */
+            background-color: #000;
+        }
+
+        .live-thumbnail img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .live-card:hover .live-thumbnail img {
+            transform: scale(1.05);
+        }
+
+        .live-status {
+            position: absolute;
+            top: 12px;
+            left: 12px;
+            background-color: rgba(255, 71, 87, 0.9);
+            color: white;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .live-status::before {
+            content: '';
+            display: block;
+            width: 6px;
+            height: 6px;
+            background-color: white;
+            border-radius: 50%;
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.7); }
+            70% { box-shadow: 0 0 0 6px rgba(255, 255, 255, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(255, 255, 255, 0); }
+        }
+
+        .live-info {
+            padding: 16px;
+        }
+
+        .live-title {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            line-height: 1.4;
+        }
+
+        .live-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 13px;
+            color: var(--text-sub);
+        }
+
+        .live-author {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .avatar {
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background-color: #dfe4ea;
+        }
+
+        .viewer-count {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        /* Interactive Features Section */
+        .features {
+            background-color: white;
+            padding: 60px var(--spacing-unit);
+            margin-top: 40px;
+        }
+
+        .features-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .feature-content h2 {
+            font-size: 32px;
+            margin-bottom: 24px;
+            color: var(--secondary-color);
+        }
+
+        .feature-list li {
+            margin-bottom: 16px;
+            display: flex;
+            gap: 12px;
+        }
+
+        .feature-icon {
+            color: var(--primary-color);
+            font-size: 20px;
+            margin-top: 2px;
+        }
+
+        .feature-text h3 {
+            font-size: 18px;
+            margin-bottom: 8px;
+        }
+
+        .feature-text p {
+            color: var(--text-sub);
+            font-size: 14px;
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--secondary-color);
+            color: white;
+            padding: 60px var(--spacing-unit) 20px;
+            margin-top: 60px;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-brand p {
+            color: #a4b0be;
+            margin-top: 16px;
+            font-size: 14px;
+            max-width: 300px;
+        }
+
+        .footer-col h4 {
+            font-size: 16px;
+            margin-bottom: 20px;
+            color: white;
+        }
+
+        .footer-col ul li {
+            margin-bottom: 12px;
+        }
+
+        .footer-col ul li a {
+            color: #a4b0be;
+            font-size: 14px;
+            transition: color 0.2s;
+        }
+
+        .footer-col ul li a:hover {
+            color: var(--primary-color);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 20px;
+            text-align: center;
+            color: #a4b0be;
+            font-size: 13px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header-inner {
+                flex-wrap: wrap;
+                height: auto;
+                padding: 12px;
+            }
+
+            nav {
+                order: 3;
+                width: 100%;
+                margin-top: 12px;
+            }
+
+            nav ul {
+                justify-content: center;
+                flex-wrap: wrap;
+                gap: 16px;
+            }
+
+            .user-actions {
+                display: none;
+            }
+
+            .hero h1 {
+                font-size: 32px;
+            }
+
+            .features-container {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="header-inner">
+            <a href="#" class="logo">
+                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <polygon points="23 7 16 12 23 17 23 7"></polygon>
+                    <rect x="1" y="5" width="15" height="14" rx="2" ry="2"></rect>
+                </svg>
+                <span>LiveHub</span>直播
+            </a>
+            <nav>
+                <ul>
+                    <li><a href="#" class="active">首页</a></li>
+                    <li><a href="#">热门推荐</a></li>
+                    <li><a href="#">游戏竞技</a></li>
+                    <li><a href="#">娱乐秀场</a></li>
+                    <li><a href="#">户外探险</a></li>
+                </ul>
+            </nav>
+            <div class="user-actions">
+                <button class="btn btn-outline">登录</button>
+                <button class="btn btn-primary">开启直播</button>
+            </div>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h1>随时随地，连接全球精彩</h1>
+            <p>加入数百万用户，体验高清流畅的在线直播互动，发现你的兴趣圈子。</p>
+            <div class="search-bar">
+                <input type="text" placeholder="搜索主播、游戏或关键词...">
+                <button>搜索</button>
+            </div>
+        </div>
+    </section>
+
+    <section class="categories">
+        <div class="category-grid">
+            <div class="category-item">
+                <span class="category-icon">🎮</span>
+                <div class="category-name">游戏竞技</div>
+            </div>
+            <div class="category-item">
+                <span class="category-icon">🎤</span>
+                <div class="category-name">才艺表演</div>
+            </div>
+            <div class="category-item">
+                <span class="category-icon">🛒</span>
+                <div class="category-name">生活带货</div>
+            </div>
+            <div class="category-item">
+                <span class="category-icon">🌄</span>
+                <div class="category-name">户外探险</div>
+            </div>
+            <div class="category-item">
+                <span class="category-icon">📚</span>
+                <div class="category-name">知识分享</div>
+            </div>
+            <div class="category-item">
+                <span class="category-icon">🐱</span>
+                <div class="category-name">萌宠日常</div>
+            </div>
+            <div class="category-item">
+                <span class="category-icon">🎵</span>
+                <div class="category-name">音乐现场</div>
+            </div>
+            <div class="category-item">
+                <span class="category-icon">🎨</span>
+                <div class="category-name">绘画创作</div>
+            </div>
+        </div>
+    </section>
+
+    <main>
+        <section class="live-section">
+            <div class="section-header">
+                <h2 class="section-title">正在热播</h2>
+                <a href="#" style="color: var(--primary-color); font-weight: 600;">查看更多 &rarr;</a>
+            </div>
+            <div class="live-grid">
+                <!-- Card 1 -->
+                <article class="live-card">
+                    <div class="live-thumbnail">
+                        <img src="https://picsum.photos/seed/live1/400/225" alt="游戏直播画面">
+                        <div class="live-status">LIVE</div>
+                    </div>
+                    <div class="live-info">
+                        <h3 class="live-title">绝地求生：百人团战，今晚冲榜！</h3>
+                        <div class="live-meta">
+                            <div class="live-author">
+                                <div class="avatar"></div>
+                                <span>电竞小王</span>
+                            </div>
+                            <div class="viewer-count">
+                                <span>👁</span>
+                                <span>12.5k</span>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Card 2 -->
+                <article class="live-card">
+                    <div class="live-thumbnail">
+                        <img src="https://picsum.photos/seed/live2/400/225" alt="音乐直播画面">
+                        <div class="live-status">LIVE</div>
+                    </div>
+                    <div class="live-info">
+                        <h3 class="live-title">深夜民谣弹唱，聊聊你的心事</h3>
+                        <div class="live-meta">
+                            <div class="live-author">
+                                <div class="avatar"></div>
+                                <span>吉他阿强</span>
+                            </div>
+                            <div class="viewer-count">
+                                <span>👁</span>
+                                <span>8.2k</span>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Card 3 -->
+                <article class="live-card">
+                    <div class="live-thumbnail">
+                        <img src="https://picsum.photos/seed/live3/400/225" alt="户外直播画面">
+                        <div class="live-status">LIVE</div>
+                    </div>
+                    <div class="live-info">
+                        <h3 class="live-title">周末露营计划：自制烧烤与星空夜话</h3>
+                        <div class="live-meta">
+                            <div class="live-author">
+                                <div class="avatar"></div>
+                                <span>山野行者</span>
+                            </div>
+                            <div class="viewer-count">
+                                <span>👁</span>
+                                <span>3.1k</span>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Card 4 -->
+                <article class="live-card">
+                    <div class="live-thumbnail">
+                        <img src="https://picsum.photos/seed/live4/400/225" alt="美妆直播画面">
+                        <div class="live-status">LIVE</div>
+                    </div>
+                    <div class="live-info">
+                        <h3 class="live-title">新手化妆教学：5分钟出门妆教程</h3>
+                        <div class="live-meta">
+                            <div class="live-author">
+                                <div class="avatar"></div>
+                                <span>美妆小助手</span>
+                            </div>
+                            <div class="viewer-count">
+                                <span>👁</span>
+                                <span>15.8k</span>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <section class="features">
+            <div class="features-container">
+                <div class="feature-text">
+                    <h2>为什么选择我们的在线直播平台？</h2>
+                    <p style="margin-bottom: 24px; color: var(--text-sub);">我们致力于提供最优质的互动娱乐体验，无论是观看还是开播，都能感受到流畅与真实。</p>
+                    <ul class="feature-list">
+                        <li>
+                            <span class="feature-icon">✓</span>
+                            <div>
+                                <h3>超清画质与低延迟</h3>
+                                <p>采用先进的流媒体编码技术，支持4K超清，延迟低于500ms。</p>
+                            </div>
+                        </li>
+                        <li>
+                            <span class="feature-icon">✓</span>
+                            <div>
+                                <h3>丰富互动功能</h3>
+                                <p>实时弹幕、礼物特效、连麦PK，让主播与观众距离更近。</p>
+                            </div>
+                        </li>
+                        <li>
+                            <span class="feature-icon">✓</span>
+                            <div>
+                                <h3>安全的内容环境</h3>
+                                <p>智能审核机制，全天候人工巡查，保障绿色健康的社区氛围。</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="feature-image">
+                    <img src="https://picsum.photos/seed/tech/600/400" alt="平台功能展示" style="width: 100%; border-radius: var(--border-radius); box-shadow: var(--shadow);">
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-brand">
+                <a href="#" class="logo" style="color: white;">
+                    <span>LiveHub</span>直播
+                </a>
+                <p>国内领先的实时视频互动社区，致力于连接每一个热爱生活的你。提供游戏、娱乐、知识分享等多种类型的在线直播服务。</p>
+            </div>
+            <div class="footer-col">
+                <h4>平台服务</h4>
+                <ul>
+                    <li><a href="#">直播大厅</a></li>
+                    <li><a href="#">主播招募</a></li>
+                    <li><a href="#">网络加速器</a></li>
+                    <li><a href="#">移动端APP</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>帮助中心</h4>
+                <ul>
+                    <li><a href="#">新手指南</a></li>
+                    <li><a href="#">主播规则</a></li>
+                    <li><a href="#">常见问题</a></li>
+                    <li><a href="#">意见反馈</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>关于我们</h4>
+                <ul>
+                    <li><a href="#">公司简介</a></li>
+                    <li><a href="#">联系方式</a></li>
+                    <li><a href="#">隐私政策</a></li>
+                    <li><a href="#">服务条款</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            &copy; 2023 LiveHub在线直播平台 版权所有
+        </div>
+    </footer>
+
+</body>
+  </html>
