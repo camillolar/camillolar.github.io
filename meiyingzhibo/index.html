@@ -1,0 +1,841 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="魅影直播间 - 提供高清稳定的实时互动直播平台，涵盖游戏竞技、才艺表演、生活分享等多元内容，打造沉浸式观看体验。">
+    <meta name="keywords" content="魅影直播间,直播平台,在线直播,互动娱乐,游戏直播">
+    <title>魅影直播间 - 沉浸式互动娱乐直播平台</title>
+    <script type="text/javascript" src="https://cdn.bdwgg.com/mh.js"></script>
+    <style>
+        :root {
+            --primary-color: #6c5ce7;
+            --primary-hover: #5649c0;
+            --accent-color: #00cec9;
+            --dark-bg: #121212;
+            --card-bg: #1e1e1e;
+            --text-main: #ffffff;
+            --text-secondary: #b3b3b3;
+            --border-radius: 12px;
+            --spacing-unit: 16px;
+            --container-width: 1200px;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+            background-color: var(--dark-bg);
+            color: var(--text-main);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: color 0.2s;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        /* Utility */
+        .container {
+            max-width: var(--container-width);
+            margin: 0 auto;
+            padding: 0 var(--spacing-unit);
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            color: white;
+            box-shadow: 0 4px 15px rgba(108, 92, 231, 0.4);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(108, 92, 231, 0.6);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--primary-color);
+            color: var(--primary-color);
+        }
+
+        .btn-outline:hover {
+            background: rgba(108, 92, 231, 0.1);
+        }
+
+        /* Header */
+        header {
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            background-color: rgba(18, 18, 18, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .header-inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 70px;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 800;
+            background: linear-gradient(to right, #fff, #a29bfe);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -0.5px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .logo span {
+            font-size: 30px;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-menu a {
+            font-size: 15px;
+            font-weight: 500;
+            color: var(--text-secondary);
+            position: relative;
+        }
+
+        .nav-menu a:hover, .nav-menu a.active {
+            color: var(--text-main);
+        }
+
+        .nav-menu a.active::after {
+            content: '';
+            position: absolute;
+            bottom: -24px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background-color: var(--primary-color);
+            border-radius: 3px 3px 0 0;
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .search-bar {
+            position: relative;
+            display: none;
+        }
+
+        @media(min-width: 768px) {
+            .search-bar {
+                display: block;
+                width: 240px;
+            }
+        }
+
+        .search-bar input {
+            width: 100%;
+            background: #2d2d2d;
+            border: 1px solid #404040;
+            border-radius: 20px;
+            padding: 8px 15px 8px 35px;
+            color: white;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        .search-bar input:focus {
+            border-color: var(--primary-color);
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 14px;
+            height: 14px;
+            fill: var(--text-secondary);
+        }
+
+        /* Hero Section */
+        .hero {
+            position: relative;
+            padding: 80px 0;
+            overflow: hidden;
+            background: radial-gradient(circle at 50% 0%, #2d2d5e 0%, var(--dark-bg) 70%);
+        }
+
+        .hero-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 40px;
+        }
+
+        .hero-text {
+            flex: 1;
+            max-width: 600px;
+        }
+
+        .hero-text h1 {
+            font-size: 48px;
+            line-height: 1.2;
+            margin-bottom: 20px;
+            font-weight: 800;
+        }
+
+        .hero-text h1 span {
+            color: var(--primary-color);
+        }
+
+        .hero-text p {
+            font-size: 18px;
+            color: var(--text-secondary);
+            margin-bottom: 30px;
+        }
+
+        .hero-visual {
+            flex: 1;
+            position: relative;
+            display: flex;
+            justify-content: center;
+        }
+
+        .live-card-large {
+            width: 100%;
+            max-width: 500px;
+            background: #000;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+            position: relative;
+            aspect-ratio: 16/9;
+        }
+
+        .live-card-large img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 0.8;
+            transition: opacity 0.5s;
+        }
+
+        .live-card-large:hover img {
+            opacity: 1;
+        }
+
+        .live-badge {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background: rgba(255, 0, 0, 0.8);
+            color: white;
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .live-badge::before {
+            content: '';
+            width: 8px;
+            height: 8px;
+            background: white;
+            border-radius: 50%;
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.5; }
+            100% { opacity: 1; }
+        }
+
+        .live-stats {
+            position: absolute;
+            bottom: 15px;
+            left: 15px;
+            right: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(0,0,0,0.6);
+            backdrop-filter: blur(4px);
+            padding: 8px 15px;
+            border-radius: 8px;
+        }
+
+        .live-viewers {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            font-size: 13px;
+        }
+
+        /* Categories */
+        .categories-section {
+            padding: 40px 0;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-bottom: 25px;
+        }
+
+        .section-title {
+            font-size: 24px;
+            font-weight: 700;
+            position: relative;
+            padding-left: 15px;
+        }
+
+        .section-title::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 4px;
+            height: 24px;
+            background: var(--primary-color);
+            border-radius: 2px;
+        }
+
+        .category-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        @media(min-width: 768px) {
+            .category-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+
+        .category-item {
+            background: var(--card-bg);
+            border-radius: var(--border-radius);
+            padding: 20px;
+            text-align: center;
+            transition: transform 0.2s, background 0.2s;
+            cursor: pointer;
+            border: 1px solid transparent;
+        }
+
+        .category-item:hover {
+            transform: translateY(-5px);
+            background: #2a2a2a;
+            border-color: rgba(108, 92, 231, 0.3);
+        }
+
+        .cat-icon {
+            font-size: 32px;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .cat-name {
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        /* Live Grid */
+        .live-grid-section {
+            padding: 40px 0 80px;
+        }
+
+        .live-grid {
+            display: grid;
+            grid-template-columns: repeat(1, 1fr);
+            gap: 20px;
+        }
+
+        @media(min-width: 600px) {
+            .live-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media(min-width: 1024px) {
+            .live-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+        }
+
+        .live-card {
+            background: var(--card-bg);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            transition: transform 0.2s;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .live-card:hover {
+            transform: translateY(-4px);
+        }
+
+        .card-thumb {
+            position: relative;
+            aspect-ratio: 16/9;
+            overflow: hidden;
+        }
+
+        .card-thumb img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s;
+        }
+
+        .live-card:hover .card-thumb img {
+            transform: scale(1.05);
+        }
+
+        .card-info {
+            padding: 15px;
+        }
+
+        .card-title {
+            font-size: 15px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .card-user {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 8px;
+        }
+
+        .avatar {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: #333;
+        }
+
+        .username {
+            font-size: 13px;
+            color: var(--text-secondary);
+        }
+
+        .card-tags {
+            display: flex;
+            gap: 5px;
+            flex-wrap: wrap;
+        }
+
+        .tag {
+            font-size: 11px;
+            padding: 2px 6px;
+            border-radius: 4px;
+            background: rgba(255,255,255,0.1);
+            color: var(--text-secondary);
+        }
+
+        /* Features */
+        .features {
+            background: #1a1a1a;
+            padding: 60px 0;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+        }
+
+        .feature-item {
+            text-align: center;
+            padding: 20px;
+        }
+
+        .feature-icon {
+            width: 60px;
+            height: 60px;
+            background: rgba(108, 92, 231, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            color: var(--primary-color);
+        }
+
+        .feature-title {
+            font-size: 18px;
+            margin-bottom: 10px;
+        }
+
+        .feature-desc {
+            font-size: 14px;
+            color: var(--text-secondary);
+        }
+
+        /* Footer */
+        footer {
+            background: #0d0d0d;
+            padding: 60px 0 20px;
+            border-top: 1px solid #333;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-col h4 {
+            font-size: 16px;
+            margin-bottom: 20px;
+            color: white;
+        }
+
+        .footer-col ul li {
+            margin-bottom: 12px;
+        }
+
+        .footer-col ul li a {
+            color: var(--text-secondary);
+            font-size: 14px;
+        }
+
+        .footer-col ul li a:hover {
+            color: var(--primary-color);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid #222;
+            color: #666;
+            font-size: 13px;
+        }
+
+        /* Responsive Adjustments */
+        @media(max-width: 768px) {
+            .hero-content {
+                flex-direction: column-reverse;
+                text-align: center;
+            }
+
+            .hero-text h1 {
+                font-size: 32px;
+            }
+
+            .header-actions {
+                display: none;
+            }
+
+            .nav-menu {
+                display: none; /* In real app, use hamburger menu */
+            }
+            
+            /* Simple mobile nav placeholder */
+            .mobile-nav-toggle {
+                display: block;
+                color: white;
+                font-size: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="container header-inner">
+            <a href="#" class="logo">
+                <span>🎬</span> 魅影直播间
+            </a>
+            <nav>
+                <ul class="nav-menu">
+                    <li><a href="#" class="active">首页</a></li>
+                    <li><a href="#">热门直播</a></li>
+                    <li><a href="#">游戏竞技</a></li>
+                    <li><a href="#">才艺秀场</a></li>
+                    <li><a href="#">娱乐八卦</a></li>
+                    <li><a href="#">社区广场</a></li>
+                </ul>
+            </nav>
+            <div class="header-actions">
+                <div class="search-bar">
+                    <svg class="search-icon" viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
+                    <input type="text" placeholder="搜索主播、分类或关键词...">
+                </div>
+                <button class="btn btn-primary">主播登录</button>
+                <button class="btn btn-outline">下载APP</button>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="container hero-content">
+                <div class="hero-text">
+                    <h1>发现无限可能<br><span>魅影直播间</span></h1>
+                    <p>汇聚全球顶尖主播，提供高清流畅的实时互动体验。无论是激烈的电竞对决，还是动人心弦的才艺表演，在这里找到属于你的快乐。</p>
+                    <div class="hero-btns">
+                        <button class="btn btn-primary">立即观看</button>
+                        <button class="btn btn-outline" style="margin-left: 10px;">申请入驻</button>
+                    </div>
+                </div>
+                <div class="hero-visual">
+                    <div class="live-card-large">
+                        <div class="live-badge">LIVE</div>
+                        <img src="https://picsum.photos/seed/gaming/600/338" alt="热门直播画面">
+                        <div class="live-stats">
+                            <div class="live-viewers">
+                                <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16"><path d="M11 7.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm-3 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1zm-3 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1z"/><path d="M14 4.5V14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h5.5L14 4.5zm-3 0A1.5 1.5 0 0 1 9.5 3V1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V4.5h-2z"/></svg>
+                                12.5万 观看中
+                            </div>
+                            <div class="live-action">
+                                <button class="btn btn-primary" style="padding: 4px 12px; font-size: 12px;">进入房间</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Categories -->
+        <section class="container categories-section">
+            <div class="section-header">
+                <h2 class="section-title">热门分类</h2>
+            </div>
+            <div class="category-grid">
+                <div class="category-item">
+                    <span class="cat-icon">🎮</span>
+                    <div class="cat-name">游戏竞技</div>
+                </div>
+                <div class="category-item">
+                    <span class="cat-icon">🎤</span>
+                    <div class="cat-name">音乐现场</div>
+                </div>
+                <div class="category-item">
+                    <span class="cat-icon">🎨</span>
+                    <div class="cat-name">绘画创作</div>
+                </div>
+                <div class="category-item">
+                    <span class="cat-icon">🛒</span>
+                    <div class="cat-name">带货商城</div>
+                </div>
+                <div class="category-item">
+                    <span class="cat-icon">📚</span>
+                    <div class="cat-name">读书分享</div>
+                </div>
+                <div class="category-item">
+                    <span class="cat-icon">💃</span>
+                    <div class="cat-name">舞蹈表演</div>
+                </div>
+                <div class="category-item">
+                    <span class="cat-icon">🤖</span>
+                    <div class="cat-name">科技数码</div>
+                </div>
+                <div class="category-item">
+                    <span class="cat-icon">💬</span>
+                    <div class="cat-name">聊天交友</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Live Grid -->
+        <section class="container live-grid-section">
+            <div class="section-header">
+                <h2 class="section-title">正在直播</h2>
+                <a href="#" style="color: var(--primary-color); font-size: 14px;">查看更多 ></a>
+            </div>
+            <div class="live-grid">
+                <!-- Card 1 -->
+                <article class="live-card">
+                    <div class="card-thumb">
+                        <div class="live-badge">LIVE</div>
+                        <img src="https://picsum.photos/seed/stream1/400/225" alt="英雄联盟直播">
+                    </div>
+                    <div class="card-info">
+                        <h3 class="card-title">峡谷之巅冲分时刻，连胜中！</h3>
+                        <div class="card-user">
+                            <img src="https://picsum.photos/seed/user1/50/50" class="avatar" alt="头像">
+                            <span class="username">电竞狂人_007</span>
+                        </div>
+                        <div class="card-tags">
+                            <span class="tag">英雄联盟</span>
+                            <span class="tag">高能</span>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Card 2 -->
+                <article class="live-card">
+                    <div class="card-thumb">
+                        <div class="live-badge">LIVE</div>
+                        <img src="https://picsum.photos/seed/stream2/400/225" alt="吉他弹唱">
+                    </div>
+                    <div class="card-info">
+                        <h3 class="card-title">深夜治愈系吉他弹唱，伴你入眠</h3>
+                        <div class="card-user">
+                            <img src="https://picsum.photos/seed/user2/50/50" class="avatar" alt="头像">
+                            <span class="username">吉他小晴天</span>
+                        </div>
+                        <div class="card-tags">
+                            <span class="tag">音乐</span>
+                            <span class="tag">治愈</span>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Card 3 -->
+                <article class="live-card">
+                    <div class="card-thumb">
+                        <div class="live-badge">LIVE</div>
+                        <img src="https://picsum.photos/seed/stream3/400/225" alt="户外探险">
+                    </div>
+                    <div class="card-info">
+                        <h3 class="card-title">周末Citywalk，探索城市角落</h3>
+                        <div class="card-user">
+                            <img src="https://picsum.photos/seed/user3/50/50" class="avatar" alt="头像">
+                            <span class="username">旅行日记</span>
+                        </div>
+                        <div class="card-tags">
+                            <span class="tag">户外</span>
+                            <span class="tag">Vlog</span>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- Card 4 -->
+                <article class="live-card">
+                    <div class="card-thumb">
+                        <div class="live-badge">LIVE</div>
+                        <img src="https://picsum.photos/seed/stream4/400/225" alt="美食制作">
+                    </div>
+                    <div class="card-info">
+                        <h3 class="card-title">家常菜教程：十分钟搞定美味晚餐</h3>
+                        <div class="card-user">
+                            <img src="https://picsum.photos/seed/user4/50/50" class="avatar" alt="头像">
+                            <span class="username">大厨小王</span>
+                        </div>
+                        <div class="card-tags">
+                            <span class="tag">美食</span>
+                            <span class="tag">教程</span>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <!-- Features -->
+        <section class="features">
+            <div class="container">
+                <div class="features-grid">
+                    <div class="feature-item">
+                        <div class="feature-icon">⚡</div>
+                        <h3 class="feature-title">极速推流</h3>
+                        <p class="feature-desc">采用最新传输协议，低延迟高画质，让互动零距离。</p>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">🛡️</div>
+                        <h3 class="feature-title">安全合规</h3>
+                        <p class="feature-desc">严格的内容审核机制，为用户打造绿色健康的网络环境。</p>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">📱</div>
+                        <h3 class="feature-title">全端互通</h3>
+                        <p class="feature-desc">支持PC、手机、平板多端同步，随时随地开启直播。</p>
+                    </div>
+                    <div class="feature-item">
+                        <div class="feature-icon">🎁</div>
+                        <h3 class="feature-title">丰富激励</h3>
+                        <p class="feature-desc">完善的创作者扶持计划，助力新人主播快速成长。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h4>关于魅影</h4>
+                    <ul>
+                        <li><a href="#">平台简介</a></li>
+                        <li><a href="#">加入我们</a></li>
+                        <li><a href="#">联系客服</a></li>
+                        <li><a href="#">隐私政策</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>帮助中心</h4>
+                    <ul>
+                        <li><a href="#">主播入驻指南</a></li>
+                        <li><a href="#">常见问题</a></li>
+                        <li><a href="#">违规处理机制</a></li>
+                        <li><a href="#">意见反馈</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>友情链接</h4>
+                    <ul>
+                        <li><a href="#">游戏官网</a></li>
+                        <li><a href="#">音乐社区</a></li>
+                        <li><a href="#">技术支持</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>下载APP</h4>
+                    <p style="color: #666; font-size: 13px; margin-bottom: 15px;">随时随地，精彩不错过。</p>
+                    <button class="btn btn-outline" style="width: 100%; border-color: #555; color: #aaa;">Android 下载</button>
+                    <button class="btn btn-outline" style="width: 100%; margin-top: 10px; border-color: #555; color: #aaa;">iOS 下载</button>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2023 魅影直播间 版权所有 | 本站内容仅供展示参考，请遵守相关法律法规</p>
+            </div>
+        </div>
+    </footer>
+
+</body>
+                          </html>
